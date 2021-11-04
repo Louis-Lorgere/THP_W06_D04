@@ -1,0 +1,33 @@
+<div class= "home">
+  <h1>Commentaire de <%=@comment.user.name%></h1>
+
+  <h3>Commentaire : <%=@comment.content%> </h3>
+  <p> <%=@comment.created_at%> </p>
+  <% if @comment.commentable_type == "Gossip" %>
+  <%= link_to "Afficher la page du potin commenté", gossip_path(id: @comment.commentable_id)%>
+  <%end%>
+  <% if @comment.commentable_type == "Comment" %>
+  <%= link_to "Afficher la page du commentaire commenté", comment_path(id: @comment.commentable_id)%>
+  <%end%>
+  <%= link_to "Commenter le commentaire", new_comment_path(:commentable_id => @comment.id, :commentable_type => "Comment")%>
+
+  <%= link_to "Afficher la page de l'utilisateur", user_path(id: @comment.user_id)%>
+  <% if session[:user_id] == @comment.user_id %>
+  <%= link_to "Modifier le commentaire", edit_comment_path(id: @comment.id)%>
+  <a href="<%= comment_path(@comment.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Effacer le commentaire</a>
+  <%end%>
+
+</div>
+
+<% if @comment.comments != []%>
+  <h1>Les Commentaires</h1>
+  <div class="album-cards">
+    <% @comment.comments.each do |comment| %>
+      <div class="card">
+      <h3> <%=comment.content%> </h3>
+      <p>Ce commentaire vous est servi par <%=comment.user.name%></p>
+      <%= link_to "Afficher le comment", "/comments/#{comment.id}"%>
+      </div>
+    <%end%>
+  </div>
+<%end%>

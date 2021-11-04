@@ -1,6 +1,7 @@
 class GossipsController < ApplicationController
   
   before_action :authenticate_user, only: [:update, :new, :create, :edit, :destroy]
+  before_action :is_connected, only: [:show]
 
   def index
     @gossips = Gossip.all
@@ -36,6 +37,7 @@ class GossipsController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @gossip.update(post_params)
     redirect_to gossip_path
+    flash[:success] = "Potin bien modifié"
   end
 
   def destroy
@@ -53,6 +55,13 @@ class GossipsController < ApplicationController
 
   def authenticate_user
     unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
+  def is_connected
+    unless session[:user_id]
       flash[:danger] = "Please log in."
       redirect_to new_session_path
     end

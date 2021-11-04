@@ -20,7 +20,10 @@
       </div>
       
       <% if session[:user_id]  %>
-      <div class="nav-item">
+        <div class="nav-item">
+        <%= link_to "COMMENTAIRES", comments_path %>
+      </div>
+        <div class="nav-item">
           <%= link_to "Créer un potin", new_gossip_path %>
         </div>
         <div class="nav-item">

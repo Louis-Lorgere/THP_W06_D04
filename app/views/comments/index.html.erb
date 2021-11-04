@@ -1,0 +1,10 @@
+<h1>Les Commentaires</h1>
+<div class="album-cards">
+  <% @comments.each do |comment| %>
+    <div class="card">
+    <h3> <%=comment.content%> </h3>
+    <p>Ce commentaire vous est servi par <%=comment.user.name%></p>
+    <%= link_to "Afficher le comment", "/comments/#{comment.id}"%>
+    </div>
+  <%end%>
+</div>

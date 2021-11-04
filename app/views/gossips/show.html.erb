@@ -5,9 +5,23 @@
   <h3>Gossip : <%=@gossip.content%> </h3>
   <p> <%=@gossip.created_at%> </p>
   <%= link_to "Afficher la page de l'utilisateur", user_path(id: @gossip.user_id)%>
+  <%= link_to "Commenter le gossip", new_comment_path(:commentable_id => @gossip.id, :commentable_type => "Gossip")%>
   <% if session[:user_id] == @gossip.user_id %>
   <%= link_to "Modifier le potin", edit_gossip_path(id: @gossip.id)%>
   <a href="<%= gossip_path(@gossip.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Effacer le potin</a>
   <%end%>
 
 </div>
+
+<% if @gossip.comments != []%>
+  <h1>Les Commentaires</h1>
+  <div class="album-cards">
+    <% @gossip.comments.each do |comment| %>
+      <div class="card">
+      <h3> <%=comment.content%> </h3>
+      <p>Ce commentaire vous est servi par <%=comment.user.name%></p>
+      <%= link_to "Afficher le comment", "/comments/#{comment.id}"%>
+      </div>
+    <%end%>
+  </div>
+<%end%>
