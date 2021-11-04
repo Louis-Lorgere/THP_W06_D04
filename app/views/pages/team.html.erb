@@ -1,0 +1,8 @@
+<div class="album-cards">
+  <% @team.each do |current| %>
+    <div class="card">
+      <h3><%= current %></h3>
+      <img src="<%= Faker::Avatar.image%>"/>
+    </div>
+  <% end %>
+</div>

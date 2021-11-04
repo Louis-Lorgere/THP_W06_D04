@@ -1,0 +1,18 @@
+
+<% if @gossip.errors.any? %>
+  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @gossip.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class= "home">
+<%= simple_form_for @gossip do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.button :submit %>
+<% end %>
+</div>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GossipProject</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application'%>
+  </head>
+<header>
+    <nav>
+      <div class="nav-item">
+        <%= link_to "ACCUEIL", gossips_path %>
+      </div>
+      <div class="nav-item">
+        <%= link_to "TEAM", "/team" %>
+      </div>
+      <div class="nav-item">
+        <%= link_to "CONTACT", "/contact" %>
+      </div>
+      
+      <% if session[:user_id]  %>
+      <div class="nav-item">
+          <%= link_to "Créer un potin", new_gossip_path %>
+        </div>
+        <div class="nav-item">
+          <%= link_to "DECONNEXION", session_path(session.id), method: :delete %>
+        </div>
+      <%end%>
+      <% if !session[:user_id]  %>
+        <div class="dropdown">
+          <button class="dropbtn">S'inscrire / Se connecter</button>
+          <div class="dropdown-content">
+            <a href="/users/new">INSCRIPTION</a>
+            <a href="/sessions/new">CONNEXION</a>
+          </div>
+        </div>
+      <%end%>
+    </nav>
+    
+  </header>
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-info">
+      <%= msg %>
+    </div>
+  <% end %>
+  <body>
+    <%= yield %>
+  </body>
+  
+</html>

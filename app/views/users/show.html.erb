@@ -1,0 +1,10 @@
+
+<div class="home">
+  <h1>Page de <%=@user.name%> </h1>
+  <ul>
+    <li>L'utilisateur vit à <%=@user.city.name%></li>
+    <li>L'utilisateur a écrit <%=@user.gossips.count%> gossip(s)</li>
+    <li>L'utilisateur a donné <%=@user.likes.count%> like(s)</li>
+  </ul>
+  <img src="<%= Faker::Avatar.image%>"/>
+</div>

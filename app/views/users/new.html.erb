@@ -1,0 +1,20 @@
+
+
+<% if @user.errors.any? %>
+  <p>Nous n'avons pas réussi à créer l'utilisateur pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<div class= "home">
+<%= simple_form_for @user do |f| %>
+  <%= f.input :name %>
+  <%= f.input :password %>
+  <%= f.association :city %>
+  <%= f.button :submit %>
+<% end %>
+</div>

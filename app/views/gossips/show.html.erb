@@ -1,0 +1,13 @@
+<div class= "home">
+  <h1>Gossip de <%=@gossip.user.name%></h1>
+
+  <h2>Titre : <%=@gossip.title%> </h2>
+  <h3>Gossip : <%=@gossip.content%> </h3>
+  <p> <%=@gossip.created_at%> </p>
+  <%= link_to "Afficher la page de l'utilisateur", user_path(id: @gossip.user_id)%>
+  <% if session[:user_id] == @gossip.user_id %>
+  <%= link_to "Modifier le potin", edit_gossip_path(id: @gossip.id)%>
+  <a href="<%= gossip_path(@gossip.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Effacer le potin</a>
+  <%end%>
+
+</div>
