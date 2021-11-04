@@ -30,7 +30,7 @@ end
 end
 
 20.times do
-  Gossip.create(title: Faker::Lorem.word(number: rand(3..13)), content: Faker::Lorem.paragraph(sentence_count: 2), user: User.all.sample(1).first)
+  Gossip.create(title: Faker::Lorem.word, content: Faker::Lorem.paragraph(sentence_count: 2), user: User.all.sample(1).first)
 end
 
 Gossip.all.each do |current|
