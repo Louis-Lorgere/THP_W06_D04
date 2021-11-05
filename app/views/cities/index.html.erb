@@ -1,0 +1,9 @@
+<h1>Les Villes</h1>
+<div class="album-cards">
+  <% @cities.each do |city| %>
+    <div class="card">
+    <h2> <%=city.name%> </h2>
+    <%= link_to "Afficher les gossips de la ville", "/cities/#{city.id}"%>
+    </div>
+  <%end%>
+</div>

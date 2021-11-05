@@ -1,0 +1,19 @@
+<h1>Les Potins de <%=@city.name %> </h1>
+<div class="album-cards">
+  <% @city.users.each do |user| %>
+    <% user.gossips.each do |gossip|%>
+      <div class="card">
+      <h3> <%=gossip.title%> </h3>
+      <p>Ce gossip vous est servi par <%=gossip.user.name%></p>
+      <%= link_to "Afficher le Gossip", "/gossips/#{gossip.id}"%>
+      <% if current_user && !current_user.likes.where(likeable_type: 'Gossip', likeable_id: gossip.id).first %>
+        <%= link_to "Like !", likes_path(:likeable_id => gossip.id, :likeable_type => "Gossip"), method: :post%>
+      <%end%>
+      <% if current_user && current_user.likes.where(likeable_type: 'Gossip', likeable_id: gossip.id).first %>
+        <a href="<%= like_path(current_user.likes.where(likeable_type: 'Gossip', likeable_id: gossip.id).first.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Effacer le like</a>
+      <%end%>
+      <p>Compteur de likes <%=gossip.likes.count%></p>
+      </div>
+    <%end%>
+  <%end%>
+</div>

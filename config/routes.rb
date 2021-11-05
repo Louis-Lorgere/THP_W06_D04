@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :likes, only: [:create, :destroy]
+  resources :cities
   resources :comments
   resources :sessions, only: [:new, :create, :destroy]
   resources :users

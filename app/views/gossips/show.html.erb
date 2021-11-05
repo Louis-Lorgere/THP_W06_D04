@@ -7,9 +7,16 @@
   <%= link_to "Afficher la page de l'utilisateur", user_path(id: @gossip.user_id)%>
   <%= link_to "Commenter le gossip", new_comment_path(:commentable_id => @gossip.id, :commentable_type => "Gossip")%>
   <% if session[:user_id] == @gossip.user_id %>
-  <%= link_to "Modifier le potin", edit_gossip_path(id: @gossip.id)%>
-  <a href="<%= gossip_path(@gossip.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Effacer le potin</a>
+    <%= link_to "Modifier le potin", edit_gossip_path(id: @gossip.id)%>
+    <a href="<%= gossip_path(@gossip.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Effacer le potin</a>
   <%end%>
+  <% if !current_user.likes.where(likeable_type: 'Gossip', likeable_id: @gossip.id).first %>
+    <%= link_to "Like !", likes_path(:likeable_id => @gossip.id, :likeable_type => "Gossip"), method: :post%>
+  <%end%>
+  <% if current_user.likes.where(likeable_type: 'Gossip', likeable_id: @gossip.id).first %>
+    <a href="<%= like_path(current_user.likes.where(likeable_type: 'Gossip', likeable_id: @gossip.id).first.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Effacer le like</a>
+  <%end%>
+  <p>Compteur de likes <%=@gossip.likes.count%></p>
 
 </div>
 

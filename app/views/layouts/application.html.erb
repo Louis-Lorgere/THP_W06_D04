@@ -18,7 +18,9 @@
       <div class="nav-item">
         <%= link_to "CONTACT", "/contact" %>
       </div>
-      
+      <div class="nav-item">
+        <%= link_to "VILLES", cities_path %>
+      </div>
       <% if session[:user_id]  %>
         <div class="nav-item">
         <%= link_to "COMMENTAIRES", comments_path %>
